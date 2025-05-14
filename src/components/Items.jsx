@@ -4,19 +4,10 @@ function Items(props) {
   const { items } = props;
 
   return (
-    <div>
-      <h1>Items</h1>
-      <ul>
-        {items.map((item) => {
-          console.log(item);
-
-          return (
-            <>
-              <ItemCard item={item} key={item.item_id}/>
-            </>
-          );
-        })}
-      </ul>
+    <div className="item-list">
+      {items.map((item) => (
+        <ItemCard key={item.item_id} item={item} />
+      ))}
     </div>
   );
 }
@@ -30,5 +21,3 @@ export default Items;
 //         </span>
 //         )
 //     }
-
-
