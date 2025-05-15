@@ -1,20 +1,19 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import Items from "./components/Items";
-import { getCategories, getItems } from "./Api";
+import { getCategories, getItems } from "./api";
 import Header from "./components/Header";
 import NavBar from "./components/NavBar";
 import Categories from "./components/Categories";
 import SearchBar from "./components/SearchBar";
 
 function App() {
-  //console.log("rendering App");
 
   const [items, setItems] = useState([]);
   const [categories, setCategories] = useState([]);
   const [searchTerm, setSearchTerm] = useState({});
 
-  useEffect(() => {
+  useEffect(() => { 
     fetchAndSetItems();
   }, [searchTerm]);
 

@@ -9,9 +9,8 @@ const marketplaceApi = axios.create({
 
 export const getItems = (searchTerm) => {
   return marketplaceApi
-    .get("/items", { params: { category_name: searchTerm.category } })
+    .get("/items", { params: { category_name: searchTerm.category, sort_by: searchTerm.sort_by, order: searchTerm.order, search: searchTerm.search, }, })
     .then((res) => {
-      console.log("SEARCH TERMS", searchTerm);
       return res.data.items;
     });
 };

@@ -10,7 +10,7 @@ function ItemCard(props) {
       <div className="item-img">
         <img
           id="item-card-img"
-          src={item.img_url}
+          src={item.img_url ? item.img_url : imgNotFound}
           alt={item.item_name}
           onError={(e) => {
             e.target.onerror = null;
