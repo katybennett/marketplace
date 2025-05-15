@@ -14,10 +14,3 @@ function Items(props) {
 
 export default Items;
 
-// {
-//     return (
-//         <span key={item.item_id}>
-//             {item.name}
-//         </span>
-//         )
-//     }

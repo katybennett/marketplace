@@ -1,26 +1,32 @@
-import { useEffect, useState } from 'react'
-import './App.css'
-import Items from './components/Items'
-import axios from 'axios'
+import { useEffect, useState } from "react";
+import "./App.css";
+import Items from "./components/Items";
+import { getItems } from "./Api";
+import Header from "./components/Header";
+import NavBar from "./components/NavBar";
 
 function App() {
-  console.log("rendering App")
+  console.log("rendering App");
 
-  const [items, setItems] = useState([])
-  
+  const [items, setItems] = useState([]);
+
   useEffect(() => {
-    axios
-      .get("https://nc-marketplace-1-xm97.onrender.com/api/items")
+    getItems()
       .then((res) => {
-        setItems(res.data.items)
+        setItems(res);
       })
-  }, [])
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <>
-      <Items items={items}/>
+      <Header/>
+      <NavBar/>
+      <Items items={items} />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

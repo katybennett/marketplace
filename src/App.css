@@ -91,3 +91,13 @@
   white-space: nowrap;
   align-self: flex-start;
 }
+
+#NavBar {
+  background-color: rgb(171, 236, 236);
+}
+
+.button-nav-bar {
+  color: white;
+  background-color: rgb(46, 80, 119);
+  margin: 3px;
+}
