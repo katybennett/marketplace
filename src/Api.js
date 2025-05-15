@@ -1,18 +1,23 @@
-import axios from "axios"
+import axios from "axios";
 
 const marketplaceApi = axios.create({
-    baseURL: "https://nc-marketplace-1-xm97.onrender.com/api",
+  baseURL: "https://nc-marketplace-1-xm97.onrender.com/api",
 });
 
+//https://nc-marketplace-1-xm97.onrender.com/api/items?category_name=electronics
+//https://nc-marketplace-1-xm97.onrender.com/api/items?search=bike
+
 export const getItems = (searchTerm) => {
-    return marketplaceApi.get("/items", { params: {category_name: searchTerm.category}}).then((res) => {
-        console.log("SEARCH TERMS", searchTerm)
-        return res.data.items;
-    })
+  return marketplaceApi
+    .get("/items", { params: { category_name: searchTerm.category } })
+    .then((res) => {
+      console.log("SEARCH TERMS", searchTerm);
+      return res.data.items;
+    });
 };
 
 export const getCategories = () => {
-    return marketplaceApi.get("/categories").then((res) => {
-        return res.data.categories
-    })
-}
+  return marketplaceApi.get("/categories").then((res) => {
+    return res.data.categories;
+  });
+};

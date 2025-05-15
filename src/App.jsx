@@ -5,22 +5,17 @@ import { getCategories, getItems } from "./Api";
 import Header from "./components/Header";
 import NavBar from "./components/NavBar";
 import Categories from "./components/Categories";
+import SearchBar from "./components/SearchBar";
 
 function App() {
-  console.log("rendering App");
+  //console.log("rendering App");
 
   const [items, setItems] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [searchTerm, setSearchTerm] = useState({category_name: ""});
+  const [searchTerm, setSearchTerm] = useState({});
 
   useEffect(() => {
-    getItems(searchTerm)
-      .then((res) => {
-        setItems(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    fetchAndSetItems();
   }, [searchTerm]);
 
   useEffect(() => {
@@ -33,22 +28,45 @@ function App() {
       });
   }, []);
 
-  function handleSearch (e) {
-    console.log("EVENT TARGET", e.target)
-    const {value, name } = e.target
-    setSearchTerm((currentSearch, e) => (
-      {
-        ...currentSearch, [name]: value
-      }
-    ))
+  function handleSearch(e) {
+    console.log("EVENT TARGET", e.target);
+    const { value, name } = e.target;
+    setSearchTerm((currentSearch) => ({
+      ...currentSearch,
+      [name]: value,
+    }));
+  }
+
+  function fetchAndSetItems() {
+    getItems(searchTerm)
+      .then((res) => {
+        setItems(res);
+        console.log("New Items set");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function handleClick(e) {
+    e.preventDefault();
+    fetchAndSetItems();
   }
 
   return (
     <>
       <Header />
-      <NavBar>
-        <Categories handleSearch={handleSearch} categories={categories} />
-        
+      <SearchBar
+        handleSearch={handleSearch}
+        handleClick={handleClick}
+        searchTerm={searchTerm}
+      />
+      <NavBar handleSearch={handleSearch}>
+        <Categories
+          handleSearch={handleSearch}
+          fetchAndSetItems={fetchAndSetItems}
+          categories={categories}
+        />
       </NavBar>
 
       <Items items={items} />
