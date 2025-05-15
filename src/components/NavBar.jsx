@@ -1,8 +1,8 @@
-function NavBar() {
+function NavBar(props) {
   return (
     <nav id="NavBar">
       <button className="button-nav-bar">All</button>
-      <button className="button-nav-bar">Categories</button>
+      {props.children}
     </nav>
   );
 }
