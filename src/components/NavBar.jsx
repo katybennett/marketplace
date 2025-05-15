@@ -1,7 +1,7 @@
 function NavBar(props) {
   return (
     <nav id="NavBar">
-      <button className="button-nav-bar">All</button>
+      <button name="category" value="" onClick={props.handleSearch} className="button-nav-bar">All</button>
       {props.children}
     </nav>
   );

@@ -4,8 +4,9 @@ const marketplaceApi = axios.create({
     baseURL: "https://nc-marketplace-1-xm97.onrender.com/api",
 });
 
-export const getItems = () => {
-    return marketplaceApi.get("/items").then((res) => {
+export const getItems = (searchTerm) => {
+    return marketplaceApi.get("/items", { params: {category_name: searchTerm.category}}).then((res) => {
+        console.log("SEARCH TERMS", searchTerm)
         return res.data.items;
     })
 };

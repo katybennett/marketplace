@@ -11,16 +11,17 @@ function App() {
 
   const [items, setItems] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [searchTerm, setSearchTerm] = useState({category_name: ""});
 
   useEffect(() => {
-    getItems()
+    getItems(searchTerm)
       .then((res) => {
         setItems(res);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [searchTerm]);
 
   useEffect(() => {
     getCategories()
@@ -32,11 +33,22 @@ function App() {
       });
   }, []);
 
+  function handleSearch (e) {
+    console.log("EVENT TARGET", e.target)
+    const {value, name } = e.target
+    setSearchTerm((currentSearch, e) => (
+      {
+        ...currentSearch, [name]: value
+      }
+    ))
+  }
+
   return (
     <>
       <Header />
       <NavBar>
-        <Categories categories={categories} />
+        <Categories handleSearch={handleSearch} categories={categories} />
+        
       </NavBar>
 
       <Items items={items} />
