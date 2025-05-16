@@ -1,8 +1,13 @@
 const imgNotFound =
   "https://media.istockphoto.com/id/1444047509/vector/coming-soon-photo-icon-with-loading-circle-no-picture-no-image-available.webp?s=2048x2048&w=is&k=20&c=SBjjvfFcckKIe06QJbIWLKR8I5iQ4AH27yoJL2Bkk9g=";
 
-function ItemCard(props) {
-  const { item } = props;
+function ItemCard({ item, setBasketItems }) {
+
+  function addToBasket (item) {
+    setBasketItems((currentBasketItems) => ([
+      ...currentBasketItems, item
+    ]));
+  }
 
   return (
     <div className="item-card-container">
@@ -33,8 +38,14 @@ function ItemCard(props) {
         <div className="item-price">
           <p>£{item.price}</p>
         </div>
+
       </div>
       {/* End */}
+      <div className="button-container">
+        <button className="button-add-basket" onClick={() => addToBasket(item)} item={item} >
+          Add to Basket
+        </button>
+        </div>
     </div>
   );
 }

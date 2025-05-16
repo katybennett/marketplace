@@ -103,6 +103,50 @@
 }
 
 .new-user-form{
-  display: flex
+  display: flex;
   flex-direction: column;
+}
+
+.button-container {
+  padding: 4px;
+}
+
+.button-add-basket {
+  color: white;
+  background-color: blue;
+}
+
+.basket-button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.basket-button {
+  color: white;
+  width: 80px;
+  height: 50px;
+  padding: 10px;
+  border: 5px solid gray;
+  margin: 0;
+}
+
+.basket-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.total-baske{
+
+}
+
+#basket-container{
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.add-kudos {
+ background-color: red;
 }

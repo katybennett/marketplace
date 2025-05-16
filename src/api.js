@@ -34,6 +34,18 @@ export const getUsers = () => {
   });
 };
 
+export const getUserByUsername = (username) => {
+  return marketplaceApi.get("/users/" + username).then((res) => {
+    return res.data.user
+  })
+}
+
+export const patchUser = (username, kudos) => {
+  return marketplaceApi.patch("/users/" + username, {kudos_inc: kudos}).then((res) => {
+    return res.data.user;
+  })
+}
+
 export const postUser = (username, avatar_url) => {
   console.log({ username: username, avatar_url: avatar_url });
   return marketplaceApi
