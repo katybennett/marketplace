@@ -1,34 +1,21 @@
-import { useEffect, useState } from "react";
 import "./App.css";
-import Items from "./components/Items";
+
+import { useEffect, useState } from "react";
 import { getCategories, getItems } from "./api";
+import { Routes, Route } from "react-router";
+
+import Items from "./components/Items";
 import Header from "./components/Header";
 import NavBar from "./components/NavBar";
 import Categories from "./components/Categories";
 import SearchBar from "./components/SearchBar";
+import UserList from "./components/UserList";
+import NewUser from "./components/NewUser";
 
 function App() {
-
-  const [items, setItems] = useState([]);
-  const [categories, setCategories] = useState([]);
   const [searchTerm, setSearchTerm] = useState({});
 
-  useEffect(() => { 
-    fetchAndSetItems();
-  }, [searchTerm]);
-
-  useEffect(() => {
-    getCategories()
-      .then((res) => {
-        setCategories(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
   function handleSearch(e) {
-    console.log("EVENT TARGET", e.target);
     const { value, name } = e.target;
     setSearchTerm((currentSearch) => ({
       ...currentSearch,
@@ -36,39 +23,20 @@ function App() {
     }));
   }
 
-  function fetchAndSetItems() {
-    getItems(searchTerm)
-      .then((res) => {
-        setItems(res);
-        console.log("New Items set");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
-  function handleClick(e) {
-    e.preventDefault();
-    fetchAndSetItems();
-  }
-
   return (
     <>
       <Header />
-      <SearchBar
-        handleSearch={handleSearch}
-        handleClick={handleClick}
-        searchTerm={searchTerm}
-      />
-      <NavBar handleSearch={handleSearch}>
-        <Categories
-          handleSearch={handleSearch}
-          fetchAndSetItems={fetchAndSetItems}
-          categories={categories}
+      <SearchBar handleSearch={handleSearch} searchTerm={searchTerm} />
+      <NavBar></NavBar>
+      <Routes>
+        <Route path="/items" element={<Items searchTerm={searchTerm} />} />
+        <Route
+          path="/categories"
+          element={<Categories handleSearch={handleSearch} />}
         />
-      </NavBar>
-
-      <Items items={items} />
+        <Route path="/users" element={<UserList />} />
+        <Route path="/newuser" element={<NewUser />} />
+      </Routes>
     </>
   );
 }

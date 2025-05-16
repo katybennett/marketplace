@@ -1,6 +1,8 @@
-function SearchBar({ handleSearch, handleClick, searchTerm }) {
+import { Link } from "react-router";
+
+function SearchBar({ handleSearch, searchTerm }) {
   return (
-    <form onSubmit={handleClick}>
+    <form>
       Search:{" "}
       <input
         type="text"
@@ -17,7 +19,9 @@ function SearchBar({ handleSearch, handleClick, searchTerm }) {
         <option value="asc">Ascending</option>
         <option value="desc">Descending</option>
       </select>
-      <button type="submit">Search</button>
+      <Link to path="/items">
+        <button>Search</button>
+      </Link>
     </form>
   );
 }

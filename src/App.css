@@ -101,3 +101,8 @@
   background-color: rgb(46, 80, 119);
   margin: 3px;
 }
+
+.new-user-form{
+  display: flex
+  flex-direction: column;
+}

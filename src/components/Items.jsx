@@ -1,7 +1,19 @@
 import ItemCard from "./ItemCard";
+import { useState, useEffect } from "react";
+import { getItems } from "../api";
 
-function Items(props) {
-  const { items } = props;
+function Items({ searchTerm }) {
+  const [items, setItems] = useState([]);
+  useEffect(() => {
+    getItems(searchTerm)
+      .then((res) => {
+        setItems(res);
+        console.log("New Items set");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <div className="item-list">
@@ -13,4 +25,3 @@ function Items(props) {
 }
 
 export default Items;
-
